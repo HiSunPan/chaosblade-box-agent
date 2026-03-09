@@ -50,6 +50,7 @@ func (handler *ServerRequestHandler) Handle(request string) (string, error) {
 	handleStartTime := time.Now()
 	logrus.Infof("[ServerRequestHandler] Handle() called at %v, request length: %d", handleStartTime, len(request))
 	var response *transport.Response
+	var allow bool
 	select {
 	case <-handler.Ctx.Done():
 		response = transport.ReturnFail(transport.HandlerClosed)
